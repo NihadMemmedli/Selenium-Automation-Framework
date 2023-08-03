@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <listeners>
+        <listener class-name="org.insider.listeners.TestListener" />
+    </listeners>
+    <test name="Navigate and Apply for QA Job">
+        <classes>
+            <class name="org.insider.tests.NavigateAndApplyForQAJobInIstanbulTest" />
+        </classes>
+    </test>
+</suite>
