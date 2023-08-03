@@ -42,15 +42,25 @@ public class OpenPositionsPage extends BasePage {
         departmentOption.click();
     }
 
-    // Verify that the application form for the lever matches the expected department and location
+    /**
+     * Verifies the Lever application form for the specified department and location.
+     * The method first selects the expected department and location, then iterates
+     * through all the links within the jobs list. For each link, it reselects the
+     * location (to avoid stale errors) and checks the individual job for compliance
+     * with the expected department and location.
+     *
+     * @param expectedDepartment The expected department to be selected in the form.
+     * @param expectedLocation   The expected location to be selected in the form.
+     */
     public void verifyLeverApplicationForm(Department expectedDepartment, Location expectedLocation) {
         selectDepartment(expectedDepartment);
         selectLocation(expectedLocation);
-        List<WebElement> viewRoleLinks = jobsList.findElements(By.tagName("a"));
+        int numberOfLinks = jobsList.findElements(By.tagName("a")).size();
 
-        for (WebElement viewRoleLink : viewRoleLinks) {
+        for (int i=0; i < numberOfLinks; i++) {
             selectLocation(expectedLocation);
-            checkIndividualJob(viewRoleLink, expectedDepartment, expectedLocation);
+            List<WebElement> viewRoleLinks = jobsList.findElements(By.tagName("a"));
+            checkIndividualJob(viewRoleLinks.get(i), expectedDepartment, expectedLocation);
         }
     }
 
