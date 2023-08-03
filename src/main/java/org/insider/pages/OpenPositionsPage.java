@@ -49,6 +49,7 @@ public class OpenPositionsPage extends BasePage {
         List<WebElement> viewRoleLinks = jobsList.findElements(By.tagName("a"));
 
         for (WebElement viewRoleLink : viewRoleLinks) {
+            selectLocation(expectedLocation);
             checkIndividualJob(viewRoleLink, expectedDepartment, expectedLocation);
         }
     }
