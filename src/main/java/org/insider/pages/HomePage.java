@@ -36,9 +36,4 @@ public class HomePage extends BasePage {
         this.companyLink.click(); // Clicking on the "Company" from menu
         this.careersLink.click(); // Clicking on the "Careers" from menu
     }
-
-    // Method to verify if the URL of the current page matches the home page URL
-    public void verifyPageURL() {
-        super.verifyPageURL(HOME_URL); // Verifying the URL using the method from the BasePage class
-    }
 }

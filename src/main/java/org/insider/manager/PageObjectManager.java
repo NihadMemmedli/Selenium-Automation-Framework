@@ -1,5 +1,8 @@
 package org.insider.manager;
 
+import org.insider.actions.CareersActions;
+import org.insider.actions.CommonActions;
+import org.insider.actions.OpenPositionsAction;
 import org.insider.pages.*;
 import org.openqa.selenium.WebDriver;
 
@@ -12,6 +15,10 @@ public class PageObjectManager {
     private HomePage homePage;
     private OpenPositionsPage openPositionsPage;
     private TeamPage teamPage;
+
+    private CommonActions commonActions;
+    private OpenPositionsAction openPositionsAction;
+    private CareersActions careersActions;
 
     // Constructor that takes the WebDriver instance as an argument.
     public PageObjectManager(WebDriver driver) {
@@ -49,5 +56,26 @@ public class PageObjectManager {
             teamPage = new TeamPage(driver);
         }
         return teamPage;
+    }
+
+    public OpenPositionsAction getOpenPositionsAction() {
+        if (openPositionsAction == null) {
+            openPositionsAction = new OpenPositionsAction(driver);
+        }
+        return openPositionsAction;
+    }
+
+    public CommonActions getCommonActions() {
+        if (commonActions == null) {
+            commonActions = new CommonActions(driver);
+        }
+        return commonActions;
+    }
+
+    public CareersActions getCareersActions() {
+        if (careersActions == null) {
+            careersActions = new CareersActions(driver);
+        }
+        return careersActions;
     }
 }

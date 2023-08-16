@@ -6,6 +6,7 @@
     <test name="Navigate and Apply for QA Job">
         <classes>
             <class name="org.insider.tests.NavigateAndApplyForQAJobInIstanbulTest" />
+<!--            <class name="org.insider.tests.N1avigateAndApplyForQAJobInIstanbulTest" />-->
         </classes>
     </test>
 </suite>

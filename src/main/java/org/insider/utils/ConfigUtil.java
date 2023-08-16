@@ -39,4 +39,9 @@ public class ConfigUtil {
     public static String getBaseURL() {
         return properties.getProperty("baseUrl");
     }
+
+    // Method to get the base retry value as specified in the properties file
+    public static Integer getRetry() {
+        return Integer.parseInt(properties.getProperty("retry"));
+    }
 }

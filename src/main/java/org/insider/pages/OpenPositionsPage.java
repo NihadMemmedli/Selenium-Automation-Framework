@@ -18,7 +18,7 @@ public class OpenPositionsPage extends BasePage {
     private WebElement filterByDepartmentContainer;
 
     @FindBy(xpath = "//*[@id='jobs-list']")
-    private WebElement jobsList;
+    public WebElement jobsList;
 
     public OpenPositionsPage(WebDriver driver) {
         super(driver);
@@ -42,59 +42,8 @@ public class OpenPositionsPage extends BasePage {
         departmentOption.click();
     }
 
-    /**
-     * Verifies the Lever application form for the specified department and location.
-     * The method first selects the expected department and location, then iterates
-     * through all the links within the jobs list. For each link, it reselects the
-     * location (to avoid stale errors) and checks the individual job for compliance
-     * with the expected department and location.
-     *
-     * @param expectedDepartment The expected department to be selected in the form.
-     * @param expectedLocation   The expected location to be selected in the form.
-     */
-    public void verifyLeverApplicationForm(Department expectedDepartment, Location expectedLocation) {
-        selectDepartment(expectedDepartment);
-        selectLocation(expectedLocation);
-        int numberOfLinks = jobsList.findElements(By.tagName("a")).size();
-
-        for (int i=0; i < numberOfLinks; i++) {
-            selectLocation(expectedLocation);
-            List<WebElement> viewRoleLinks = jobsList.findElements(By.tagName("a"));
-            checkIndividualJob(viewRoleLinks.get(i), expectedDepartment, expectedLocation);
-        }
-    }
-
-    // Verify that position details match the expected department and location
-    public void verifyPositionDetails(Department expectedDepartment, Location expectedLocation) {
-        List<WebElement> positionItems = driver.findElements(By.className("position-list-item"));
-
-        for (WebElement positionItem : positionItems) {
-            String department = positionItem.findElement(By.className("position-department")).getText();
-            String location = positionItem.findElement(By.className("position-location")).getText();
-            Assert.assertEquals(department, expectedDepartment.getValue(), "Department does not match the expected value.");
-            Assert.assertEquals(location, expectedLocation.getValue(), "Location does not match the expected value.");
-        }
-    }
-
     // Create the dynamic XPath for location or department option
     private String createFilterOptionXpath(String dynamicValue, String value) {
         return "//li[contains(@id, '" + dynamicValue + "') and text()='" + value + "']";
-    }
-
-    // Check individual job details including department and location
-    private void checkIndividualJob(WebElement viewRoleLink, Department expectedDepartment, Location expectedLocation) {
-        JSUtil.removeTargetAttribute(driver, viewRoleLink);
-        checkJobDetails(expectedDepartment, expectedLocation);
-        driver.navigate().back();
-        WaitUtil.waitForElementToBeVisible(driver, jobsList);
-    }
-
-    // Verify the details of a specific job, such as department and location
-    private void checkJobDetails(Department expectedDepartment, Location expectedLocation) {
-        verifyBaseUrl("https://jobs.lever.co/useinsider/");
-        WebElement postingCategories = driver.findElement(By.className("posting-categories"));
-        checkContainsText(postingCategories.findElement(By.className("department")), expectedDepartment.getValue().toUpperCase());
-        checkContainsText(postingCategories.findElement(By.className("location")), expectedLocation.getValue().toUpperCase());
-        Assert.assertNotNull(driver.findElement(By.linkText("APPLY FOR THIS JOB")));
     }
 }

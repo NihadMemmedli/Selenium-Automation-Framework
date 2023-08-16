@@ -1,5 +1,6 @@
 package org.insider.pages;
 
+import org.insider.actions.CommonActions;
 import org.insider.enums.Department;
 import org.insider.utils.ConfigUtil;
 import org.insider.utils.JSUtil;
@@ -12,7 +13,8 @@ import org.testng.Assert;
 // The CareersPage class encapsulates the interactions with the careers page of the website.
 public class CareersPage extends BasePage {
 
-    private static final String Careers_URL = ConfigUtil.getBaseURL() + "careers/";
+    public static final String Careers_URL = ConfigUtil.getBaseURL() + "careers/";
+    private final CommonActions commonActions = new CommonActions(driver);
 
     // WebElements related to different sections on the Careers Page
     @FindBy(id = "page-head")
@@ -73,14 +75,6 @@ public class CareersPage extends BasePage {
         JSUtil.clickElement(driver, teamName);
     }
 
-    // Method to validate the correct loading of the Careers Page including its main sections
-    public void verifyCareersPage() {
-        verifyPageURL(Careers_URL);
-        Assert.assertTrue(this.isPageLoaded());
-        Assert.assertTrue(this.isTeamsSectionOpened());
-        Assert.assertTrue(this.isLocationsSectionOpened());
-        Assert.assertTrue(this.isLifeAtInsiderSectionOpened());
-    }
 
     // Method to navigate to a specific team page, using the Department enum
     public void navigateToSpecificTeamPage(Department teamName) {
