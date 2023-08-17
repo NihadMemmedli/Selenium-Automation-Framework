@@ -7,6 +7,7 @@ import org.insider.base.BaseTest;
 import org.insider.enums.Department;
 import org.insider.enums.Location;
 import org.insider.pages.*;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -32,51 +33,76 @@ public class NavigateAndApplyForQAJobInIstanbulTest extends BaseTest {
 
     @Test()
     public void testNavigateAndApplyForQAJobInIstanbul() {
-        // Navigate to the home page and verify the URL
         homePage.navigateToHomePage();
+        extentTest.info("Navigated to the home page");
+
         commonActions.verifyHomePageURL();
+        extentTest.info("Verified home page URL");
+
         homePage.acceptAllCookies();
+        extentTest.info("Accepted all cookies");
 
-        // Navigate to the careers page and verify the page details
         homePage.navigateToCareersPage();
-        careersActions.verifyCareersPage();
+        extentTest.info("Navigated to Careers page");
 
-        // Navigate to the Quality Assurance team page
+        careersActions.verifyCareersPage();
+        extentTest.info("Verified Careers page details");
+
         careersPage.navigateToSpecificTeamPage(Department.QUALITY_ASSURANCE);
+        extentTest.info("Navigated to the Quality Assurance team page");
+
         commonActions.verifyPageURL("https://useinsider.com/careers/quality-assurance/");
+        extentTest.info("Verified QA team page URL");
 
-        // Open all jobs for the Quality Assurance team
         teamPage.openAllJobs();
+        extentTest.info("Opened all jobs for Quality Assurance team");
+
         commonActions.verifyPageURL("https://useinsider.com/careers/open-positions/?department=qualityassurance");
+        extentTest.info("Verified URL after opening all jobs");
 
-        // Verify position details for QA in Istanbul
         openPositionsAction.verifyPositionDetails(Department.QUALITY_ASSURANCE, Location.ISTANBUL);
+        extentTest.info("Verified position details for QA in Istanbul");
 
-        // Verify the application form for QA in Istanbul
         openPositionsAction.verifyLeverApplicationForm(Department.QUALITY_ASSURANCE, Location.ISTANBUL);
+        extentTest.info("Verified the application form for QA in Istanbul");
     }
 
-    @Test(groups = {"fast"})
-    public void testNavigateAndApplyForQAJobInIstanbul1() {
-        // Navigate to the home page and verify the URL
+    @Test(groups = {"fail"})
+    public void testWillBeFailed() {
         homePage.navigateToHomePage();
-        commonActions.verifyHomePageURL();
-        homePage.acceptAllCookies();
+        extentTest.info("Navigated to the home page");
 
-        // Navigate to the careers page and verify the page details
+        commonActions.verifyHomePageURL();
+        extentTest.info("Verified home page URL");
+
+        homePage.acceptAllCookies();
+        extentTest.info("Accepted all cookies");
+
         homePage.navigateToCareersPage();
+        extentTest.info("Navigated to Careers page");
+
         careersActions.verifyCareersPage();
+        extentTest.info("Verified Careers page details");
+
+        Assert.assertEquals(true, false);
+        extentTest.fail("Forced test failure");
     }
 
-    @Test(groups = {"fast"})
-    public void testNaavigateAndApplyForQAJobInIstanbul1() {
-        // Navigate to the home page and verify the URL
+    @Test(groups = {"Tag1"})
+    public void testWithTag() {
         homePage.navigateToHomePage();
-        commonActions.verifyHomePageURL();
-        homePage.acceptAllCookies();
+        extentTest.info("Navigated to the home page");
 
-        // Navigate to the careers page and verify the page details
+        commonActions.verifyHomePageURL();
+        extentTest.info("Verified home page URL");
+
+        homePage.acceptAllCookies();
+        extentTest.info("Accepted all cookies");
+
         homePage.navigateToCareersPage();
+        extentTest.info("Navigated to Careers page");
+
         careersActions.verifyCareersPage();
+        extentTest.info("Verified Careers page details");
     }
 }

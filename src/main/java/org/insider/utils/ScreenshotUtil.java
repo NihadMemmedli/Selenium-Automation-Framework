@@ -15,7 +15,7 @@ public class ScreenshotUtil {
         this.driver = driver;
     }
 
-    public void takeScreenshot(String testName) {
+    public String takeScreenshot(String testName) {
         // Taking screenshot
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
@@ -29,5 +29,7 @@ public class ScreenshotUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return path;
     }
 }
